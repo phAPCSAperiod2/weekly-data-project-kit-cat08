@@ -11,23 +11,33 @@ public class WeeklyData {
     // TODO: Declare a private array to store the week’s data
     //       Choose an appropriate type (double[] or int[])
     //       Create other instance variables as necessary
+    private double[] spendings;
+    private double goal;
+    private double balance;
     
-
-
     // -------------------------------------------------------------
     // Constructor
     // -------------------------------------------------------------
     /**
-     * Constructs a WeeklyData object by taking in an array of values
+     * Constructs a WeeklyData object by taking in an array of spending values
      * and making a deep copy (element-by-element) into the internal array.
      *
      * @param input an array representing 7 days of data
+     * @param goal  the spending goal per day
+     * @param balance the current balance available
      */
     public WeeklyData(double[] input) {
         // TODO: (Optional) Check if input is null and handle appropriately
         // TODO: Create a new array with the same length as input
         // TODO: Copy each value from input into the internal data array
         // NOTE: Do NOT do this.data = input; (that would create aliasing)
+        this.spendings = new double[input.length];
+       // this.goal = goal;
+       // this.balance = balance;
+
+        for (int i = 0; i < input.length; i++) {
+            this.spendings[i] = input[i];
+        }
     }
 
 
@@ -43,7 +53,11 @@ public class WeeklyData {
         // TODO: Create a variable to store the running total
         // TODO: Use a loop to add each value in the array to the total
         // TODO: Return the total
-        return 0.0; // replace with your calculated total
+        double sum = 0.0;
+        for (double spent: spendings){
+            sum += spent;
+        }
+        return sum; // replace with your calculated total
     }
 
 
@@ -54,13 +68,19 @@ public class WeeklyData {
      * Calculates and returns the average value for the week.
      *
      * @return the average of the values in the array,
-     *         or 0.0 if the array is empty
+     *         or 0.0 if the array is empty 
      */
     public double getAverage() {
         // TODO: If the array length is 0, return 0.0
         // TODO: Otherwise, divide the total by the number of elements
         // Hint: You may call getTotal()
-        return 0.0; // replace with your calculated average
+        if (spendings.length == 0) {
+            return 0.0;
+        }
+        else{
+            return getTotal() / spendings.length; // replace with your calculated average
+        }
+       
     }
 
 
@@ -76,7 +96,13 @@ public class WeeklyData {
         // TODO: Assume the first value is the current maximum
         // TODO: Loop through the rest of the array and update max as needed
         // TODO: Return the maximum value found
-        return 0.0; // replace with the maximum value
+        double max = spendings[0];
+        for (double spent: spendings){
+            if (spent > max){
+                max = spent;
+            }
+        }
+        return max; // replace with the maximum value
     }
 
 
@@ -92,8 +118,24 @@ public class WeeklyData {
         // TODO: Assume the first value is the current minimum
         // TODO: Loop through the rest of the array and update min as needed
         // TODO: Return the minimum value found
-        return 0.0; // replace with the minimum value
+        double min = spendings[0];
+        for (double spent: spendings){
+            if (spent < min){
+                min = spent;
+            }
+        }
+        return min; // replace with the minimum value
     }
+    
+    public boolean isWithinBudget() {
+        for (double spent : spendings) {
+            if (spent > goal || spent > balance) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
 
     // -------------------------------------------------------------
@@ -115,6 +157,10 @@ public class WeeklyData {
         // TODO: Loop through the data array
         // TODO: Append each value with a day label (Day 1, Day 2, etc.)
         // TODO: Return the completed String
-        return ""; // replace with your formatted output
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < spendings.length; i++) {
+            sb.append("Day ").append(i + 1).append(": ").append(spendings[i]).append("\n");
+        }
+        return sb.toString(); // replace with your formatted output
     }
 }
