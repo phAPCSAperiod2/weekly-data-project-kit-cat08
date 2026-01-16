@@ -26,14 +26,14 @@ public class WeeklyData {
      * @param goal  the spending goal per day
      * @param balance the current balance available
      */
-    public WeeklyData(double[] input) {
+    public WeeklyData(double[] input, double goal, double balance) {
         // TODO: (Optional) Check if input is null and handle appropriately
         // TODO: Create a new array with the same length as input
         // TODO: Copy each value from input into the internal data array
         // NOTE: Do NOT do this.data = input; (that would create aliasing)
         this.spendings = new double[input.length];
-       // this.goal = goal;
-       // this.balance = balance;
+       this.goal = goal;
+       this.balance = balance;
 
         for (int i = 0; i < input.length; i++) {
             this.spendings[i] = input[i];
@@ -159,8 +159,24 @@ public class WeeklyData {
         // TODO: Return the completed String
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < spendings.length; i++) {
-            sb.append("Day ").append(i + 1).append(": ").append(spendings[i]).append("\n");
+            sb.append("Day ").append(i + 1).append(": ").append("$").append(spendings[i]).append("\n");
         }
         return sb.toString(); // replace with your formatted output
+    }
+
+    public double finalBalance() {
+        double totalSpent = getTotal();
+        balance -= totalSpent;
+        return balance;
+    }
+
+    public int daysOverGoal() {
+        int count = 0;
+        for (double spent : spendings) {
+            if (spent > goal) {
+                count++;
+            }
+        }
+        return count;
     }
 }

@@ -200,5 +200,11 @@ You must:
   - Your chosen project theme  
   - A short description of your program
 
+  ## Program Description
+  
+  Budget Analyzer
+  - Author: Cathy Vo
+  - Purpose: My program takes a person's daily spending goal, balance, and spending to give feedback on how they did in terms of their goal and how they can improve to better meet that goal if necessary.
+
 
 
