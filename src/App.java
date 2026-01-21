@@ -46,7 +46,7 @@ public class App {
         for (int i = 0; i < weekData.length; i++) {
             System.out.println("Enter your spending for day " + (i + 1) + ": ");
             while (!scan.hasNextDouble()) {
-                System.out.println("Invalid input. Spending cannot be negative. Please re-enter:");
+                System.out.println("Invalid input. Please re-enter:");
                 scan.next();
             }
             double input = scan.nextDouble();
@@ -92,27 +92,35 @@ public class App {
         //         --> "You were very hydrated this week!"
         //         --> etc.
         // -------------------------------------------------------------
+        
         insights(weeklyData, balance, goal);
+        
      // end of while loop with goal and balance check
 
 
 
 }
     public static void insights(WeeklyData data, double balance, double goal) {
-        double finalBalance = data.finalBalance();
-        if (data.finalBalance() < 0) {
+        double finalBalance = data.getBalance();
+        if (finalBalance < 0) {
             System.out.println("You spent more than your balance! Consider cutting back on non-essential spending.");
-        } else if(finalBalance < balance-goal*7) {
-            System.out.println("You need to spend less next week to stay within your budget!");
-        } else if (finalBalance > balance) {
+        } 
+        else if(finalBalance == balance-(goal*7)) {
+            System.out.println("You were close to your budget this week. Try to cut out small expenses next week!");
+        } 
+        else if (finalBalance > balance-(goal*7)) {
             System.out.println("Great job! You stayed well within your budget this week!");
-        } else {
-            System.out.println("You were close to your budget this week. Try to improve next week!");
+        } 
+        else {
+            System.out.println("You went over your budget. You need to monitor your spending more closely next week.");
         }
+        
+       
       
     }
     
     public static void displayResults(WeeklyData data) {
+        System.out.println("Weekly Spending Analysis:");
         System.out.println("Total spending for the week: " + data.getTotal());
         System.out.println("Average daily spending: " + data.getAverage());
         System.out.println("Minimum daily spending: " +  data.getMin());
@@ -128,7 +136,7 @@ public class App {
         }
         double goal = scan.nextDouble();
         while (goal < 0) {
-            System.out.println("Spending goal cannot be negative. Please re-enter:");
+            System.out.println("Spending goal cannot be negative or zero. Please re-enter:");
             while (!scan.hasNextDouble()) {
                 System.out.println("Invalid input. Please enter a numeric value for your spending goal.");
                 scan.next(); // consume the invalid input
@@ -145,7 +153,7 @@ public class App {
         }
         double balance = scan.nextDouble();
         while (balance <= 0) {
-            System.out.println("Balance cannot be negative. Please re-enter:");
+            System.out.println("Balance cannot be negative or zero. Please re-enter:");
             while (!scan.hasNextDouble()) {
                 System.out.println("Invalid input. Please enter a numeric value for your balance.");
                 scan.next(); // consume the invalid input

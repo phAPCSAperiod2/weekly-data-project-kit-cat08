@@ -14,7 +14,27 @@ public class WeeklyData {
     private double[] spendings;
     private double goal;
     private double balance;
-    
+
+//-------------------------------------------------------------
+    // Getters and Setters
+    // -------------------------------------------------------------
+public double getGoal() {
+        return goal;
+}
+public void setGoal(double goal) {
+    this.goal = goal;
+}
+
+public double getBalance() {
+        return balance;
+}
+
+
+public void setBalance(double balance) {
+    this.balance = balance;
+}
+
+
     // -------------------------------------------------------------
     // Constructor
     // -------------------------------------------------------------
