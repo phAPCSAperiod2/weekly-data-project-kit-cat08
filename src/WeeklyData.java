@@ -1,7 +1,8 @@
 /**
- * The WeeklyData class stores and analyzes a week’s worth of numeric data.
- * This could represent steps taken, hours of sleep, money spent, screen time,
- * or any other measurable daily value.
+ * The WeeklyData class stores and analyzes a week’s worth of numeric data of user spending.
+ * @author Cathy Vo
+ * @collaborators Mrs. Morris
+ * @version 1/21/2026
  */
 public class WeeklyData {
 

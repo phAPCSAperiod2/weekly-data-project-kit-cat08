@@ -1,44 +1,35 @@
 import java.util.Scanner;
 
 /**
- * Instructions:
- * - Complete the WeeklyData.java class first.
- * - Use this App class to collect user input and test your WeeklyData methods.
- * - Follow all TODOs carefully.
- * - Do NOT hard-code values — use loops and method calls.
+ * App class is a basic budgeting program that collects daily spending data from the user and analyzes it to give insights about their spending habits.
+ * @author Cathy Vo
+ * @version 1/21/2026
  */
 public class App {
 
     public static void main(String[] args) {
-
         // -------------------------------------------------------------
         // TODO 1: Create a Scanner for user input
         // -------------------------------------------------------------
         Scanner scan = new Scanner(System.in);
-
         // -------------------------------------------------------------
         // TODO 2: Give information about your program
         //         Ask the user about their goals (if applicable)
         // -------------------------------------------------------------
         System.out.println("Welcome to Budget Basics!");
         System.out.println("You will be prompted to enter your spending goal for each day of the week, balance, and daily spending.");
-       
         double goal = setGoal(scan);
         double balance = setBalance(scan);
-        
-        
         // -------------------------------------------------------------
         // TODO 3: Create an array to hold 7 days of data
         //         Use an appropriate data type (int or double)
         //         Name the array weekData
         // -------------------------------------------------------------
         double[] weekData = new double[7];
-
         // -------------------------------------------------------------
         // TODO 4: Use a for loop to collect data for each day of the week
         //         Prompt example:
         //         "Enter <data type> for day X: "
-        //
         //         Include input validation:
         //         - Use a while loop to prevent negative values
         //         - Re-prompt if the value is invalid
@@ -60,13 +51,11 @@ public class App {
             }
             weekData[i] = input;
         }
-
         // -------------------------------------------------------------
         // TODO 5: Create a WeeklyData object
         //         Pass the weekData array into the constructor
         // -------------------------------------------------------------
         WeeklyData weeklyData = new WeeklyData(weekData, goal, balance);
-
         // -------------------------------------------------------------
         // TODO 6: Display the results of the analysis
         //         Call methods from WeeklyData to display:
@@ -78,32 +67,31 @@ public class App {
         //         Use clear labels and formatted output if needed
         // -------------------------------------------------------------
         displayResults(weeklyData);
-
         // -------------------------------------------------------------
         // TODO 7: Display the full week of data
         //         Use the toString() method from WeeklyData
         // -------------------------------------------------------------
         System.out.println("Here is your spending data for the week:");
         System.out.println(weeklyData.toString());
-
         // -------------------------------------------------------------
         // TODO 8: Give the user insights about their week
         //         --> "You need to drink more water next week!"
         //         --> "You were very hydrated this week!"
         //         --> etc.
         // -------------------------------------------------------------
-        
         insights(weeklyData, balance, goal);
-        
-     // end of while loop with goal and balance check
-
-
-
 }
+
+/**
+ * Gives insights based on the user's spending data.
+ * @param data the user's spending data in an WeeklyData object
+ * @param balance the user's balance before spending
+ * @param goal the user's daily spending goal
+ */
     public static void insights(WeeklyData data, double balance, double goal) {
         double finalBalance = data.getBalance();
         if (finalBalance < 0) {
-            System.out.println("You spent more than your balance! Consider cutting back on non-essential spending.");
+            System.out.println("You spent more than your balance! Consider cutting back on all non-essential spending.");
         } 
         else if(finalBalance == balance-(goal*7)) {
             System.out.println("You were close to your budget this week. Try to cut out small expenses next week!");
@@ -115,10 +103,14 @@ public class App {
             System.out.println("You went over your budget. You need to monitor your spending more closely next week.");
         }
         
-       
+       System.out.println();
       
     }
     
+    /**
+     * Displays the results of the weekly spending analysis.
+     * @param data the user's spending data in a WeeklyData object
+     */
     public static void displayResults(WeeklyData data) {
         System.out.println("Weekly Spending Analysis:");
         System.out.println("Total spending for the week: " + data.getTotal());
@@ -127,7 +119,14 @@ public class App {
         System.out.println("Maximum daily spending: "+ data.getMax());
         System.out.println("Days exceeding spending goal: " + data.daysOverGoal());
         System.out.println("Current balance available: " + data.finalBalance());
+        System.out.println();
     }
+
+    /**
+     * Prompts the user to set their daily spending goal with input validation.
+     * @param scan the Scanner object for user input
+     * @return the validated daily spending goal
+     */
     public static double setGoal(Scanner scan){
         System.out.println("What is your daily spending goal? ");
         while (!scan.hasNextDouble()) {
@@ -145,6 +144,12 @@ public class App {
         }
         return goal;
     }
+
+    /**
+     * Prompts the user to set their current balance with input validation.
+     * @param scan the Scanner object for user input
+     * @return the validated current balance
+     */
     public static double setBalance(Scanner scan){
        System.out.println("What is your current balance available? ");
         while (!scan.hasNextDouble()) {
@@ -162,4 +167,7 @@ public class App {
         }
         return balance;
     }
-}
+
+
+
+}// end of App class
