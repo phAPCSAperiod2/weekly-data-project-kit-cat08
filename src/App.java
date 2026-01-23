@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 /**
- * App class is a basic budgeting program that collects daily spending data from the user and analyzes it to give insights about their spending habits.
+ * App class is a basic budgeting program that collects daily spending data from the user and analyzes it using WeeklyData to give insights about their spending habits.
  * @author Cathy Vo
  * @version 1/21/2026
  */
@@ -91,16 +91,20 @@ public class App {
     public static void insights(WeeklyData data, double balance, double goal) {
         double finalBalance = data.getBalance();
         if (finalBalance < 0) {
-            System.out.println("You spent more than your balance! Consider cutting back on all non-essential spending.");
+            System.out.println("You spent more than your balance! Cut back on all non-essential spending.");
+            System.out.println("Tip: Set aside a specific amount for essentials and put money into your savings right when you get your paycheck");
         } 
         else if(finalBalance == balance-(goal*7)) {
             System.out.println("You were close to your budget this week. Try to cut out small expenses next week!");
+            System.out.println("Tip: Bring lunch from home instead of eating out for work/school.");
         } 
         else if (finalBalance > balance-(goal*7)) {
             System.out.println("Great job! You stayed well within your budget this week!");
+            System.out.println("Tip: Consider allocating some of your savings towards a fun activity or treat for yourself.");
         } 
         else {
             System.out.println("You went over your budget. You need to monitor your spending more closely next week.");
+            System.out.println("Tip: Try tracking your expenses daily to identify and reduce unnecessary spending.");
         }
         
        System.out.println();

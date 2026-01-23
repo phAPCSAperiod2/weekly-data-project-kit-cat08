@@ -1,5 +1,5 @@
 /**
- * The WeeklyData class stores and analyzes a week’s worth of numeric data of user spending.
+ * The WeeklyData class stores and analyzes a week’s worth of numeric data of user spending. It allows the user to set a spending goal and current balance, and provides methods to calculate total, average, minimum, and maximum spending, as well as other useful statistics.
  * @author Cathy Vo
  * @collaborators Mrs. Morris
  * @version 1/21/2026
@@ -19,18 +19,31 @@ public class WeeklyData {
 //-------------------------------------------------------------
     // Getters and Setters
     // -------------------------------------------------------------
+/**
+ * Returns the spending goal set for the week.
+ * @return the spending goal
+ */
 public double getGoal() {
         return goal;
 }
+/**
+ * Sets the daily spending goal.
+ * @param goal
+ */
 public void setGoal(double goal) {
     this.goal = goal;
 }
-
+/**
+ * Returns the current balance available.
+ * @return the current balance
+ */
 public double getBalance() {
         return balance;
 }
-
-
+/**
+ * Sets the current balance available.
+ * @param balance
+ */
 public void setBalance(double balance) {
     this.balance = balance;
 }
@@ -185,12 +198,19 @@ public void setBalance(double balance) {
         return sb.toString(); // replace with your formatted output
     }
 
+    /**
+     * Calculates the final balance after spending for the week.
+     * @return the final balance after spending
+     */
     public double finalBalance() {
         double totalSpent = getTotal();
         balance -= totalSpent;
         return balance;
     }
-
+    /**
+     * Counts the number of days where spending exceeded the daily goal.
+     * @return the number of days over the spending goal
+     */
     public int daysOverGoal() {
         int count = 0;
         for (double spent : spendings) {
